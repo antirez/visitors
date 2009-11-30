@@ -1,7 +1,7 @@
 # Makefile for visitors
 # Copyright (C) 2004 Salvatore Sanfilippo <antirez@invece.org>
 # All Rights Reserved
-# Under the GPL license version 2
+# Under the BSD license (see COPYING)
 
 DEBUG?= -g
 CFLAGS?= -O2 -Wall -W

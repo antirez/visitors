@@ -3,7 +3,7 @@
  * Copyright (C) 2004-2006 Salvatore Sanfilippo <antirez@invece.org>
  * All Rights Reserved.
  *
- * This software is released under the terms of the GPL license version 2.
+ * This software is released under the terms of the BSD license.
  * Read the COPYING file in this distribution for more details. */
 
 #include <stdio.h>

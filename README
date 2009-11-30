@@ -57,43 +57,7 @@ Without this code the screen resolution report will not work.
 HOW TO HELP
 -----------
 
-Unfortunately I can't accept source code written by external contributors
-without a "Copyright Assignment", because I'm not sure I'll take the
-GPL license in the future, instead I may switch to BSD, or even to create
-a commercial version of Visitors (very unlikely). Because I don't like
-the idea of "Copyright Assignment" at all I'll be happy to implement
-any useful feature in Visitors for you so: Please send suggestions
-and bug reports. Thank you.
-
-ABOUT THE GPL, AND WHY SOMETIMES IT DOES NOT WORK
--------------------------------------------------
-
-There is some kind of problem with the GPL and small projects, when
-you can expect an amount of help by external contributors that is so
-little that's not worth the "License Lock-In" problem. What I mean
-is that Visitors is under the GPL license, and I'm not sure I'll be
-happy with this license forever. For example I may want to change
-the license using the BSD in the future, it's worth to lost the
-ability to do it just to accept some patch?
-
-When it's a big project and it is very likely to get a lot of contribs
-all is ok, I start directly with the BSD license. An example of this
-is the "Jim Interpreter", an open source program I started to develop
-after Visitors itself (see http://jim.berlios.de). You get a lot of help,
-the project gets bigger/better, still if you want you can use the
-code for your commercial stuff (it's BSD), and everybody can do it.
-
-Also note that nor the GPL accepting patches, nor the BSD allow
-the open source developer to create software that is available in
-two flawours: one free, and one commercial. BSD allows this but
-everybody can create another commercial product based on the same
-code: not fair. GPL allows this if you don't accept patches, that's
-also not good given that after all the code contributed will stay
-anyway in the GPL product forever.
-
-This is why I don't accept patches for Visitors, and why I'm highly
-unhappy with this solution. If you have some idea or comment please
-feel free to send it to antirez (at) gmail (dot) org.
+Please send patches, I'll merge it, but be aware the project is now licensed under the BSD license, it's no longer GPLed.
 
 THANKS TO ...
 -------------

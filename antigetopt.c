@@ -1,6 +1,6 @@
 /* antigetopt -- a getopt replacement
  * Copyright(C) 2001 Salvatore Sanfilippo <antirez@invece.org>
- * This software is released under the GPL license
+ * This software is released under the BSD license (see COPYING)
  * see the COPYING file for more information */
 
 /* $Id: antigetopt.c,v 1.1.1.1 2005/10/02 22:44:47 antirez Exp $ */

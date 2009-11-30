@@ -1,7 +1,7 @@
 /* An implementation of hash tables:
  * Copyright(C) 2000-2004 by Salvatore Sanfilippo <antirez@invece.org>
  *
- * This software is under the GNU GPL license
+ * This software is under the BSD license
  */
 
 #include <sys/types.h>
