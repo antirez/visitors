@@ -1,0 +1,535 @@
+.TH VISITORS "1" "April 2005" "Visitors 0.7"
+.SH NAME
+visitors \- a fast web server log analyzer
+.SH SYNOPSIS
+.B visitors
+[\fIoptions] \fI<filename> [\fI<filename> ...]
+.SH DESCRIPTION
+.PP
+.I Visitors
+generates access statistics from specified web log files.
+
+The resulting reports contain a number of useful informations and
+statistics:
+.IP \[bu] 2
+Requested pages
+.IP \[bu]
+Requested images
+.IP \[bu]
+Referers by number of visits and age
+.IP \[bu]
+Unique visitors in each day
+.IP \[bu]
+Page views per visit
+.IP \[bu]
+Pages accessed by the Google crawler (and the date of google's last
+access on every page)
+.IP \[bu]
+Pages accessed by the AdSense crawler (and the date of adsense's last
+access on every page)
+.IP \[bu]
+Percentage of visits originated from Google searches for every day
+.IP \[bu]
+User navigation patterns (web trails)
+.IP \[bu]
+Keyphrases used in Google searches
+.IP \[bu]
+Human languages used in google searches
+.IP \[bu]
+User agents
+.IP \[bu]
+Weekdays and Hours distributions of accesses
+.IP \[bu]
+Weekdays/Hours combined bidimensional map
+.IP \[bu]
+Month/Day combined bidimensional map
+.IP \[bu]
+Visual path analysis with Graphviz
+.IP \[bu]
+Operating systems, browsers and domains popularity
+.IP \[bu]
+Visitors screen resolution and color depth
+.IP \[bu]
+404 errors
+.PP
+The web log files don't need to follow a strict format, except: the date
+MUST be included between [ and ] chars, the client hostname MUST be the
+first entry in the log, referers and requests MUST be included between
+double quote chars. Out of the box Apache log file will work without
+problems.
+
+It's possible to use Visitors with IIS log files converting them using
+the iis2apache.pl utility distributed with Visitors (The utility is
+the same you can find at http://www.jammed.com/~jwa/hacks/ and
+is distributed under the GPL license).
+
+Note that logfile can be a \- character to use the standard input.
+.PP
+.SS "Available options:"
+.TP 8
+.BI "\-A \-\-all"
+Activate all the optional reports. This option is equivalent to
+.B -GKUWRDOB.
+Note that 
+.B --trails
+is not implicitly included in this option because it also requires
+.B --prefix.
+See the
+.B --trails
+option documentation for details.
+.PP
+.TP 8
+.BI "\-T \-\-trails"
+Enable the Web Trails feature. The report will show what are the more
+frequent moves between pages of your site. This option requires the
+.B --prefix
+option to work.
+.PP
+.TP 8
+.BI "\-G \-\-google"
+Activate two reports about pages accessed by the Google and Adsense web
+crawlers. Pages are shown ordered accordingly to the last time the Google
+web crawler requested the page. The first page shown is the latest that was
+accessed.
+.PP
+.TP 8
+.BI "\-K \-\-google\-keyphrases"
+Activate a report that shows common search keyphrases used to found your
+web site from Google.
+.PP
+.TP 8
+.BI "\-Z \-\-google\-keyphrases-age"
+Activate a report that shows common the lastest keyphrases used to found your
+site from Google.
+.PP
+.TP 8
+.BI "\-H \-\-google\-human-language"
+Activate a report that shows common human languages used to serach
+from Google. This feature uses the 'hl' variable of the Google
+referer URL.
+.PP
+.TP 8
+.BI "\-U \-\-user\-agents"
+Show information about common user agents.
+.PP
+.TP 8
+.BI "\-W \-\-weekday\-hour\-map"
+Activate the generation of a combined weekdays/hours bidimensional map
+that shows information about traffic in every 168 different hours of a 7
+days week. Brighter colors mean higher traffic. This is ideal to figure
+what's the best moment on a week for a maintenance downtime, what's the
+target of the site, if people are accessing it from work or from home,
+and so on. The map is generated as pure html inside the report.
+.PP
+.TP 8
+.BI "\-M \-\-month\-day\-map"
+Activate the generation of a combined month/day bidimensional map
+that shows information about traffic in every 365 different days of
+the year. Brighter colors mean higher traffic. This is useful in order
+to figure with a quick look traffic trends and days with particuarly high
+or low traffic. The map is generated as pure html inside the report.
+.PP
+.TP 8
+.BI "\-R \-\-referers\-age"
+Shows referers ordered by age. The 'age' of a referer is the date it
+appeared the first time. In the report, newer referers are on top.  This
+report is useful to check for new external links.
+.PP
+.TP 8
+.BI "\-D \-\-domains"
+Activate the generation of information about Top Level Domains
+popularity. This information may be useful to guess the amount of visits
+from different countries. Note that Visitors will not resolve numerical
+IP addresses if they are not already resolved in the log file. All the
+unresolved IP addresses will be shown in this report under the entry
+Unresolved IP.
+.PP
+.TP 8
+.BI "\-O \-\-operating\-systems"
+Activate the report about Operating Systems popularity, sorted by number
+of accesses. All the common operating systems are listed in the report,
+while unknown operating systems will be summed in the unknown entry.
+.PP
+.TP 8
+.BI "\-B \-\-browsers"
+Activate the report about Browsers popularity, sorted by number of
+accesses. All the common browsers are listed in the report, while
+unknown browsers will be summed in the unknown entry. Browsers are
+listed by family (for example Internet Explorer, Opera, and so on), and
+not by specific version.
+.PP
+.TP 8
+.BI "\-X \-\-error404"
+Activate the generation of missing documents (404 error) report.  This
+report will show files requested, but missing, ordered by number of
+requests. The report is useful in order to discover if for some mistake
+there is some file missing in the web site, but often you will see
+bizarre requests performed by users or internet worms and security
+scans.
+.PP
+.TP 8
+.BI "\-Y \-\-pageviews"
+Activate the generation of a report that shows (and approximation) of
+the percentage of pages viewed per unique visit. The goal of this report
+is to understand the usage pattern of the site and the level of interest
+of the visitors. For example, in a site that provides a number of pages
+with interesting contents, the percentage of visitors performing a
+single page view per visit is probably searching for something else.
+.PP
+.TP 8
+.BI "\-S \-\-robots"
+Activate the generation of a report that shows user agents of clients
+requesting the file robots.txt, with the exception of the MSIE Crawler
+requests. The result is a list of web robots and spieders that accessed
+your web site, ordered by number of requests of robots.txt.
+.PP
+.TP 8
+.BI "\-\-screen\-info"
+Activate the screen resolution and color depth reports. Note that for this
+report to work you have to insert on your HTML pages the javascript code
+you can find in the README file in the visitors tarball.
+.PP
+.TP 8
+.BI "\-\-stream"
+Enable the Stream Mode (see the 
+.B STREAM MODE DETAILS
+section for more information). Shortly: when in stream mode
+.I Visitors
+will process all the log files specified (possibly none, that's valid in
+this mode) as usual, producing the report. Then the stream mode is
+entered and
+.I Visitors
+will start to read from standard input for a continuous stream of web
+logs, updating the statistics incrementally as new data is available.  A
+new report is produced periodically if new data arrived, accordingly to
+the
+.B --update-every
+option (default is to update the statistics every ten minutes). It's
+possible to ask
+.I Visitors
+to reset the statistics after some period of time using the
+.B --reset-every
+option.  This allows to have a snapshot of what is going on in the last
+five minutes, hour, day or week.  Note that
+.B --stream
+requires
+.B --output-file
+because
+.I Visitors
+needs to overwrite the report for every update, so can't output to
+standard output as usually.  If you plan to use the stream mode, also
+check the
+.B --tail
+option.
+.PP
+.TP 8
+.BI "\-\-update\-every" " seconds"
+By default in Stream Mode statistics are updated every 10 minutes. This
+option specifies a different period in seconds.
+.PP
+.TP 8
+.BI "\-\-reset\-every" " seconds"
+By default in Stream Mode statistics are never reset, but continuously
+updated incrementally. This option specifies to reset statistics after
+the given amount of time in seconds. This is useful to have a snapshot
+of the web site usage.
+.PP
+.TP 8
+.BI "\-f \-\-output\-file" " file"
+Write output to
+.I file
+instead of stdout.
+.PP
+.TP 8
+.BI "\-m \-\-max\-lines" " number"
+Set the max number of entries that should be shown in reports like
+referers, keyphrases and so on. This option sets all the reports max
+number of entries for all the reports at once.
+.PP
+.TP 8
+.BI "\-r \-\-max\-referers" " number"
+Set the max number of entries in the referer report.
+.PP
+.TP 8
+.BI "\-p \-\-max\-pages" " number"
+Set the max number of entries in the accessed pages report.
+.PP
+.TP 8
+.BI "\-i \-\-max\-images" " number"
+Set the max number of entries in the accessed images report.
+.PP
+.TP 8
+.BI "\-x \-\-max\-error404" " number"
+Set the max number of entries in the missing documents report.
+.PP
+.TP 8
+.BI "\-u \-\-max\-useragents" " number"
+Set the max number of entries in the user agents report.
+.PP
+.TP 8
+.BI "\-t \-\-max\-trails" " number"
+Set the max number of entries in the web trails report.
+.PP
+.TP 8
+.BI "\-g \-\-max\-googled" " number"
+Set the max number of entries in the crawled pages report (google bot).
+.PP
+.TP 8
+.BI "    \-\-max\-adsensed" " number"
+Set the max number of entries in the crawled pages report (adsense bot).
+.PP
+.TP 8
+.BI "\-k \-\-max\-google\-keyphrases" " number"
+Set the max number of entries in the Google keyphrases report.
+.PP
+.TP 8
+.BI "\-a \-\-max\-referers\-age" " number"
+Set the max number of entries in the referers by date report.
+.PP
+.TP 8
+.BI "\-d \-\-max\-domains" " number"
+Set the max number of entries in the domains report.
+.PP
+.TP 8
+.BI "\-P \-\-prefix" " string"
+Prefixes specify to visitors how a link should look like to be
+classified as internal to your site. This option is required for
+.B --trails
+and will also have the nice effect to avoid that internal links are
+shown in the referers report. If you are analyzing statistics for
+http://www.your.site.com/, just use:
+.B --prefix http://www.your.site.com
+
+If your site is reachable using more hostnames you should specify all
+these, like in the following example:
+.br
+.B --prefix http://www.your.site.com --prefix http://your.site.com
+.PP
+.TP 8
+.BI "\-o \-\-output" " html|text"
+Output module. You can use text or html. The default is html.
+.PP
+.TP 8
+.BI "\-V \-\-graphviz"
+This option enables the Graphviz mode:
+.I Visitors
+will analyze the log file and create a graph describing the access
+patterns of your web site. The information used to create the graph is
+the same as the web trails report (that you can enable with --trails),
+but as a graph it can be more readable for non trivial sites. An example
+on how to use this feature:
+
+% visitors access.log --prefix http://www.hping.org \\
+  --graphviz > graph.dot
+
+% dot /tmp/graph.dot -Tpng > graph.png
+
+On Debian systems, the
+.B dot
+command is included in the
+.B graphviz
+package. The generated graph will have edges of different colors, from
+blue to red to specify a low to high level of popularity of a given
+movement from one page to another of the web site.  This option requires
+one or more
+.B --prefix
+options in order to work, just like the
+.B --trails
+option.
+.PP
+.TP 8
+.BI "\-V \-\-graphviz-ignorenode-google"
+Don't put the google node on the generated graph. Only useful
+with
+.B --trails
+.PP
+.TP 8
+.BI "\-V \-\-graphviz-ignorenode-external"
+Don't put the external referer node on the generated graph. Only useful
+with
+.B --trails
+.PP
+.TP 8
+.BI "\-V \-\-graphviz-ignorenode-noreferer"
+Don't put the node indicating requests without referer on the generated graph.
+Only useful with
+.B --trails
+.PP
+.TP 8
+.BI "\-\-tail"
+When this option is specified
+.I Visitors
+will emulate the Unix command tail -f --max-unchanged-stats=1 -q. You
+can specify the log file names to monitor for changes, once new data is
+appended in any of the specified file, visitors will output the new data
+to the standard output. This option is useful conjunction to the Stream
+Mode (--stream). Files can be log-rotated because
+.I Visitors
+in Tail Mode will always try to reopen the file to check for changes.
+.PP
+.TP 8
+.BI "\-\-time\-delta" " delta"
+If your web server is in a different timezone than most of your visitors
+or yourself, you will notice a shift in the reports regarding time and
+days of week. By default,
+.I Visitors
+will generate output using the host's locale. You can use the
+.B --time-delta
+option in order to adjust the output. Positive values will shift on the
+right (toward future) from the given number of hours, negative values
+will shift on the left (toward past). In the future this option may have
+support to directly specify the output timezone.
+.PP
+.TP 8
+.BI "\-\-filter\-spam"
+Filter referer spam using a keyword-based filter (see blacklist.h
+for more information on keywords). If you don't know what referer
+spam is check this Wikipedia page: http://en.wikipedia.org/wiki/Referer_spam
+.PP
+.TP 8
+.BI "\-\-ignore\-404"
+When this option is turned on log lines with 404 errors are just used to generate the 404 errors report and not used for other reports.
+.PP
+.TP 8
+.BI "\-\-grep" " pattern"
+Process only log lines matching the specified pattern.
+Patterns are matched using the glob-style matching (the one
+used by the unix shell):
+.RS
+.IP \fB*\fR 10
+Matches any sequence of characters in \fIstring\fR, including a null
+string.
+.IP \fB?\fR 10
+Matches any single character in \fIstring\fR.
+.IP \fB[\fIchars\fB]\fR 10
+Matches any character in the set given by \fIchars\fR.  If a sequence
+of the form \fIx\fB\-\fIy\fR appears in \fIchars\fR, then any
+character between \fIx\fR and \fIy\fR, inclusive, will match.
+.IP \fB\e\fIx\fR 10
+Matches the single character \fIx\fR.  This provides a way of avoiding
+the special interpretation of the characters \fB*?[]\e\fR in
+\fIpattern\fR.
+.RE
+For default matching is performed in a case sensitive way, but
+case insensitive matching may be forced prefixing the pattern
+with the string \fBcs:\fR, so for example the pattern \fBcs:firefox\fR
+will match all the log lines containing the string firefox, FireFox,
+FIREFOX and so on.
+.PP
+.TP 8
+.BI "\-\-exclude" " pattern"
+Works exactly like \fB--grep\fR, but only lines NOT matching
+the specified pattern are processed. Note that --grep and --exclude
+can be used multiple times, and are processed sequentially.
+For example \fBvisitors --grep firefox --exclude download\fR will
+process only lines including the string firefox but not including
+the string download.
+.PP
+.TP 8
+.BI "\-\-debug"
+Show additional information on errors. For example invalid lines
+are printed on the standard error if found. Mainly useful for developers and
+error reporting.
+.PP
+.TP 8
+.BI "\-h \-\-help"
+Show usage and copyright information.
+.PP
+.TP 8
+.BI "\-v \-\-version"
+Show program version.
+.SH EXAMPLES
+The simplest usage, to be used interactively when you have a web log to
+check (for example over ssh in your web server), just use:
+
+% visitors access.log | less
+
+That will produce a human readable output in text only. To generate html
+web stats with much more information you may use instead this:
+
+% visitors --output text -A -m 30 access.log -o html > report.html
+
+If you want information on the usage patterns for your site you must
+provide the url prefix of your web site, and specify the
+.B --trails
+option. The next example produces an HTML report with usage patterns
+information.
+
+% visitors -A -m 30 access.log --trails \\
+  --prefix http://www.hping.org > report.html
+
+Note that it's ok to specify multiple file names, or to provide the
+input using the standard input like in the following two examples:
+
+% visitors /var/log/apache/access.log.*
+.br
+% zcat access.log.*.gz | visitors -
+
+.SH STREAM MODE DETAILS
+.PP
+The usual way to run
+.I Visitors
+is to specify some option to control the report generation, and the name
+of log files.  For example to generate a report from two Apache's access
+log files you can write:
+
+% visitors -A access.log.1 access.log.2 > report.html
+
+.I Visitors
+will analyze the log files, and will output the report.  Sometimes it
+can be more interesting to have web statistics updated continuously,
+almost in real time, as new data is available. In order to provide this
+feature
+.I Visitors
+implements a mode called Stream Mode that reads a stream of logs from
+the standard input.  The following command line shows how to use it (but
+check the --stream option documentation for more information).
+
+% tail -f /var/log/apache/access.log | \\
+  visitors --stream -A --update-every 60 \\
+  --output-file /tmp/report.html
+
+.I Visitors
+will incrementally update the statistics as new logs are available and
+will update the html report every 60 seconds.  As you can see in this
+mode is required to specify the report file name using the
+.B --output-file
+option because
+.I Visitors
+needs to overwrite the report to update it. Note that instead of the
+tail command in the above example it is possible to use instead
+.I Visitors
+in Tail Mode (an emulation for the tail program):
+
+% visitors --tail /var/log/apache/access.log | \\
+  visitors --stream -A --update-every 60 \\
+  --output-file /tmp/report.html
+
+It's possible to generate real time statistics about the last N seconds
+of web traffic, where N is configurable and can be from few seconds to
+one week or more, using the
+.B --reset-every
+option. The following example generates statistics updated every 30
+seconds about the last hour of traffic:
+
+% visitors --tail /var/log/apache/access.log | \\
+  visitors --stream -A --update-every 30 --reset-every 3600 \\
+  --output-file /tmp/report.html
+.SH "AUTHORS"
+.PP
+.I Visitors
+was written by Salvatore Sanfilippo <antirez@invece.org>.
+.SH "COPYING"
+Copyright
+.if t \(co
+.if n (C)
+2004,2005 Salvatore Sanfilippo <antirez@invece.org>.
+.PP
+.I Visitors
+is distributed under the GNU General Public License.
+.PP
+This manual page was written (based on the original HTML documentation)
+by Romain Francoise <rfrancoise@debian.org> for the Debian GNU/Linux
+system, but may be used by others.
+Salvatore Sanfilippo updated this man page starting from Visitors 0.5, this
+manual page is now part of the Visitors tarball.

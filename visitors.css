@@ -1,0 +1,47 @@
+H2 {
+    font-family: Verdana, Arial;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+DD {
+    font-family: Verdana, Arial;
+    font-size: 12px;
+}
+
+A {
+    font-family: Verdana, Arial;
+    font-size: 12px;
+}
+
+.maintitle {
+	font-family: Verdana, Arial;
+	font-size: 16px;
+	font-weight: bold;
+}
+
+.title {
+	font-family: Verdana, Arial;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+.text {
+	font-family: Verdana, Arial;
+	font-size: 12px;
+	margin-left: 5px;
+}
+
+.code {
+	font-family: monospace;
+	font-weight: bold;
+	color: darkgreen;
+	font-size: 12px;
+	margin-left: 9px;
+}
+
+LI {
+	font-family: Verdana, Arial;
+        font-size: 12px;
+        margin-left: 5px;
+}

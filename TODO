@@ -1,0 +1,59 @@
+- Ignore 404 errors in every report, but in the 404 errors.
+
+- Screen resolution: conver 32 colorDepth to 24. Set a cookie with
+  expire time to 24 hours so that the screen resolution is checked only
+  for new visitors and not for every pageview.
+
+- Good suggestions at http://www.karlnelson.net/weblog/000925.html
+
+- Compress the man page with gzip -9 for Debian policy
+
+- Glob-style matching in --prefix, like:
+	--prefix *invece.org
+
+- Keyword trails:
+	hping -> /
+	hping3 -> /hping3.html
+	packet MTU -> /docs.html
+	...
+
+- Enter pages
+
+- Best referer in every month+year. This may be done with a single
+  hash table if the key is: month+year+referer, then sort it by hits,
+  and get every pair of month+year one the first time (running the
+  hash table form the higher hits to the lower ones).
+
+- Best keyphrase in every month+year. See "Best referer in every month+year"
+  for implementation tips.
+
+- When the list of urls/referers/... are limited, a final
+  entry "others" should sum all the non shown values.
+
+- Countries by IP addresses? http://www.maxmind.com/app/geoip_country
+
+- --period to limit the analysis to log entries matching the specified period.
+
+- Processing time in seconds with decimal part, like 5,663 seconds.
+  After this is implemented, it may print the lines for second speed
+  if the time spent is more than 2 seconds or so.
+  win32: http://mail.gnu.org/archive/html/bug-gnu-chess/2004-01/msg00020.html
+
+- Page-specific referers
+
+- An option to specify an external CSS name to link inside the HTML
+  instead of the inline CSS.
+
+- An option to specify the r/g/b values of the bidimentional maps
+
+- Exclude google crawler accesses from weekday-hour map report?
+
+- Modify parse_date() to cache the result.
+
+- Normal "Foobar by hits" statistics should show the percentage
+
+- Better formatting for the new reports browser/os/domain in the
+  plaintext report.
+
+- Think about hashing the time as unix-time integer instead of string in
+  order to reduce processing time and memory usage.

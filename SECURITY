@@ -1,0 +1,21 @@
+SECURITY FILE
+
+This file will contain a list of bugs related to security problems found
+in visitors. Currently no bug of this kind was reported or found.
+
+VISITORS CODE QUALITY AND AUDITING
+
+Visitors is tested with big log files and the valgrind program before of every
+release to ensure that there aren't obvious memory violation problems
+with normal log files, and was written with care about security.
+
+POSSIBLE PROBLEMS
+
+Still it's a C program that does a lot of pointer math in order to
+be fast, and its work is to process untrusted input (what's written in
+log files is in part client-driven), this file is here to contain
+detailed information if this kind of bugs will be found in future.
+
+LIST OF SECURITY BUGS FOUND
+
+  None for now.

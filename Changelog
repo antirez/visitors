@@ -1,0 +1,114 @@
+-> Visitors 0.7 Released (30 March 2006)
+
+30Mar2005 - Added screen resolution and color depth report (via Javascript) see the README file for more info.
+12Dic2005 - Added --debug option for verbose errors.
+17Nov2004 - Debian Bug#339594: default output is html, but the manpage says text. Fixed. Thanks to Rick Pasotto for reporting the bug.
+15Nov2005 - --grep and --exclude options implemented.
+13Nov2005 - --ignore-404 option, useful to ignore log lines about missing pages. When this option is turned on log lines with 404 errors are just used to generate the 404 errors report and not used for other reports.
+
+-> Visitors 0.61 Released (25 October 2005)
+
+24Oct2005 - Versioning scheme changed, after 0.6 now there is 0.61 instead of 0.6a like it was in the past. 0.6a may look like an alpha release.
+24Oct2005 - Ignore more bots other than bots from google when computing unique visitors stats. This makes unique visitors stats much more reliable, there are crawlers with 200 and more different IP addresses so the unique visitors algorithm does not help there.
+
+-> Visitors 0.6 Released (10 October 2005)
+
+10Oct2005 - New report: Adsensed-pages. Like googled-pages but for the adsense crawler, that's supposted to be the one with Mediapartners-Google user agent.
+10Oct2005 - Fixed a bug resulting in wrong googled-pages report.
+04Oct2005 - Some formatting problem and a bug introduced in the 0.6 beta version fixed thanks to Simon Waters <sysadmin at zynet dot net>
+03Oct2005 - Visitors's site finally contains a Japanese translation thanks to Takeshi ABE (tabe (at) fixedpoint (dot) jp).
+02Oct2005 - Fixed the parsing code to detect the user agent string when no occurence of (...) string is present. This results in more accurate stats.
+02Oct2005 - New feature: Referer spam filtering via blacklist.h
+02Oct2005 - New report: google's "hl" human language.
+17Sep2005 - Browsers list updated, Internet Explorer splitted into IE4, IE5 and IE6, detection of Firefox as a special case of Gecko based.
+16Sep2005 - Fixed Debian Bug #312345, adding newline for every 'td' table
+element generated to create 2D maps. This makes simpler to send reports by
+email. Thanks to Simon Waters <sysadmin at zynet dot net>
+
+-> Visitors 0.5 Released
+
+29Apr2005 - An unix manual page was added thanks to Romain Francoise <rfrancoise at debian dot org> that wrote it for Debian.
+29Apr2005 - Most stats are now done by visits instead of by hits.
+28Apr2005 - Changes to the referer algorithms to be a bit more immune to referer spamming.
+28Apr2005 - Memory usage reduced of 50% with very minor speed penality.
+28Apr2005 - Fixed an overflow resulting in negative percentages in reports.
+07Dec2004 - Added .swf and .js extensions as 'images'.
+03Oct2004 - Fixed a bug in url encoding routine.
+02Oct2004 - Resolved a collision with the short option 'P' (Thx to Yvse Goerden for bug report).
+02Oct2004 - Added options to ignore selected "special" nodes, for the grapvhiz graph generation.
+02Oct2004 - Better graphviz graph generation, includes google, external link, no referers, percentages in arcs.
+27Sep2004 - HTML is now the default output module
+27Sep2004 - Highlight colors for weekend days changed (more visible).
+27Sep2004 - Referers by age, in the report is now named "referers by first time"
+25Sep2004 - New report: monthly visitors and monthly visitors from google.
+24Sep2004 - New report: month-day bidimentional map.
+
+--> Visitors 0.4a Released
+
+agent.
+22Sep2004 - Fixed a problem resulting from a change in Google's bot user
+
+--> Visitors 0.4 Released
+
+develop shell scripts. Thanks to David Siegal for the suggestion.
+file specified. It's more useful for system administrators that want to
+exit with error code '1' instead to continue and try to process the next log
+15Sep2004 - On missing file or error in report generation Visitors will now
+14Sep2004 - keyphrases in "google keyphrases" report are now links that will perform a search on google for the given keyphrase. Thanks to David Siegal for the idea.
+13Sep2004 - Fixed a bug in the parser (vi_parse_line don't used to check if vi_parse_date() returned an error). Added a redundant sanity check related to this. Thanks to David Siegal <dsiegal at brave dot cs dot uml dot edu> for reporting the error and offending (currupted) log lines.
+13Aug2004 - New report: pageviews per visit.
+12Aug2004 - Added --time-delta option to the command line. It's useful if the web server is in a timezone but most visitors are accessing the site from a different timezone. Feature suggested by Philipp Droessler <pd (at) im-all.net>.
+30Jul2004 - Keyphrases are now processed in a case-insensitive manner, spaces at the start and at the end of the keyphrases are now filtered.
+30Jul2004 - Google Keyphrases report contains the number of google page for every keyphrase.
+30Jul2004 - New report, 404 errors.
+29Jul2004 - Google's cache accesses no longer reported as keyphrases.
+29Jul2004 - Keyphrases and requested pages/files are now urldecoded in the report.
+29Jul2004 - Now referers report shows two new items: internal link and google search engine.
+31May2004 - Fixed makefile to respect environment vars thanks to Florent Thoumie <flz at xbsd dot org>
+
+--> Visitors 0.3a Released
+
+27May2004 - Fixed a compilation problem with older versions of GCC
+27May2004 - Fixed a bug in the plaintext output formatting
+
+--> Visitors 0.3 Released
+
+23May2004 - the General Information section now includes the generation date.
+23May2004 - New report, Browsers
+22May2004 - New report, Operating Systems by hits.
+22May2004 - Weekend dates highlighted in the html report.
+22May2004 - Added ancors to reports to easily jump to the specified report.
+22May2004 - Css modified.
+22May2004 - Stream mode implemented, for incremental statistics almost in realtime.
+22May2004 - Fixed compilation on SunOS (patch from Michel Gravey <michel.gravey (at) orange (dot) fr>)
+22May2004 - New report, clients top level domains by hits.
+22May2004 - Implemented a 'tail-mode' that emulates the unix "tail -f" command. The tail-mode handles file rotations. This new mode will be useful with the stream-mode still not implemented.
+22May2004 - Dates are converted in time_t values at line-parsing stage, and converted back to strings only to create reports. After this change the gogoled and referers by age reports are sorted even by hour/minute/second and not only by date. This should also make it faster.
+21May2004 - Fixed a bug with referers by age, on date format error don't stop the log processing now.
+20May2004 - All the output functions modified to get a file descriptor as first argument instead to assume standard output.
+
+--> Visitors 0.2a Released
+
+12May2004 - New report, referers by age. A new function generalize the report of url/date type.
+12May2004 - 'print_keykey_method' modofied to get the number of the item.
+12May2004 - Referers report does no longer include referers from google.
+12May2004 - Added subtitles in reports to better explain how to read they.
+11May2004 - 'print_numkey_method' modified to get the number of the item, so reports like referer, keyphrases have numbered items from "1)" to "<max>)".
+11May2004 - Credits text in html output modified.
+11May2004 - New report, bidimentional weekdays/hours map.
+
+--> Visitors 0.2 Released
+
+09May2004 - Too long lines are now truncated in the html report.
+09May2004 - Fixed a bug in google's keyphrases processing.
+09May2004 - Fixed a bug in the text output module bar printing.
+09May2004 - Web trails max lines made configurable with --max-trails.
+09May2004 - CSS files are now reported under the "images and css" report.
+08May2004 - Added support to output Graphviz graphs with web trails.
+08May2004 - Multiple --prefix options are now accepted and processed.
+08May2004 - Order of reports visualization changed.
+08May2004 - New report added: visitors from google VS all the rest for every day.
+07May2004 - Entries with "bad" dates are now put at the end of the "unique visitors for every day" report.
+07May2004 - Fixed 'processed in N seconds' stderr output in case of file not found. (Salvatore Sanfilippo)
+
+--> Visitors 0.1 Released
