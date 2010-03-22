@@ -1612,20 +1612,57 @@ int vi_process_web_trails(struct vih *vih, char *ref, char *req)
 	return 0;
 }
 
-/* Process Top Level Domains.
+/* Reverse a string in place. Courtesy of Bob Stout. */
+char *strrev(char *str)
+{
+	char *p1, *p2;
+
+	if (! str || ! *str)
+		return str;
+
+	for (p1 = str, p2 = str + strlen(str) - 1; p2 > p1; ++p1, --p2) {
+		*p1 ^= *p2;
+		*p2 ^= *p1;
+		*p1 ^= *p2;
+	}
+
+	return str;
+}
+
+/* Process Domains.
  * Returns zero on success. Non zero is returned on out of memory. */
 int vi_process_tld(struct vih *vih, char *hostname)
 {
-	char *tld;
+	char *tld, *dot;
 	int res;
 
-	if (vi_is_numeric_address(hostname)) {
-		tld = "numeric IP";
-	} else {
-		tld = strrchr(hostname, '.');
-		if (!tld) return 0;
-		tld++;
+	if (vi_is_numeric_address(hostname))
+		tld = "Unknown";
+	else
+	{
+		strrev(hostname);
+		dot = strchr(hostname, '.');
+		if (!dot) return 0;
+
+		/* Show third-level domain for country-code top-level domains. */
+		/* Otherwise we get unhelpful entries like .co.uk. */
+		if (dot - hostname < 3)
+		{
+			dot = strchr(++dot, '.');
+			if (!dot) return 0;
+		}
+
+		dot = strchr(++dot, '.');
+
+		if (!dot)
+			return 0;
+		else
+			*dot = '\0';
+
+    strrev(hostname);
+    tld = hostname;
 	}
+
 	res = vi_counter_incr(&vih->tld, tld);
 	if (res == 0) return 1;
 	return 0;
@@ -2823,8 +2860,8 @@ void vi_print_tld_report(FILE *fp, struct vih *vih)
 	vi_print_generic_keyvalbar_report(
 			fp,
 			"Domains",
-			"Top Level Domains sorted by visits",
-			"Total number of Top Level Domains",
+			"Domains sorted by visits",
+			"Total number of Domains",
 			Config_max_tld,
 			&vih->tld,
 			qsort_cmp_long_value);
