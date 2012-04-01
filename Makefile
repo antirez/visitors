@@ -5,7 +5,7 @@
 
 DEBUG?= -g
 CFLAGS?= -O2 -Wall -W
-CCOPT= $(CFLAGS)
+CCOPT= $(CFLAGS) $(CPPFLAGS)
 
 OBJ = visitors.o aht.o antigetopt.o tail.o
 PRGNAME = visitors
@@ -14,7 +14,7 @@ all: visitors
 
 visitors.o: visitors.c blacklist.h
 visitors: $(OBJ)
-	$(CC) -o $(PRGNAME) $(CCOPT) $(DEBUG) $(OBJ)
+	$(CC) -o $(PRGNAME) $(LDFLAGS) $(CCOPT) $(DEBUG) $(OBJ)
 
 .c.o:
 	$(CC) -c $(CCOPT) $(DEBUG) $(COMPILE_TIME) $<
