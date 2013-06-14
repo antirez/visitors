@@ -1404,6 +1404,7 @@ int vi_process_os(struct vih *vih, char *agent)
 {
 	/* Order may matter. */
 	char *oslist[] = {
+		"Windows Phone OS", "Windows Phone",
 		"Windows", NULL,
 		"Win98", "Windows",
 		"Win95", "Windows",
@@ -1437,6 +1438,11 @@ int vi_process_browsers(struct vih *vih, char *agent)
 	char *browserslist[] = {
 	    "Chrome", NULL,
 		"Opera", NULL,
+		"IEMobile/7.0", "Mobile Internet Explorer 7.0",
+		"IEMobile/8.0", "Mobile Internet Explorer 8.0",
+		"IEMobile/9.0", "Mobile Internet Explorer 9.0",
+		"IEMobile/10.0", "Mobile Internet Explorer 10.0",
+		"IEMobile", "Mobile Internet Explorer unknown version",
 		"MSIE 4", "Explorer 4.x",
 		"MSIE 5", "Explorer 5.x",
 		"MSIE 6", "Explorer 6.x",
