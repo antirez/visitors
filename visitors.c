@@ -1404,6 +1404,7 @@ int vi_process_os(struct vih *vih, char *agent)
 {
 	/* Order may matter. */
 	char *oslist[] = {
+		"Windows Phone OS", "Windows Phone",
 		"Windows", NULL,
 		"Win98", "Windows",
 		"Win95", "Windows",
@@ -1413,6 +1414,10 @@ int vi_process_os(struct vih *vih, char *agent)
 		"-linux-", "Linux",
 		"Macintosh", NULL,
 		"Mac_PowerPC", "Macintosh",
+		"Darwin", "Macintosh",
+		"iPad", "iOS",
+		"iPhone", "iOS",
+		"iPod", "iOS",
 		"SunOS", NULL,
 		"FreeBSD", NULL,
 		"OpenBSD", NULL,
@@ -1431,11 +1436,20 @@ int vi_process_browsers(struct vih *vih, char *agent)
 	 * send an user agent where there is the string "Gecko"
 	 * so it must be before Gecko. */
 	char *browserslist[] = {
+	    "Chrome", NULL,
 		"Opera", NULL,
+		"IEMobile/7.0", "Mobile Internet Explorer 7.0",
+		"IEMobile/8.0", "Mobile Internet Explorer 8.0",
+		"IEMobile/9.0", "Mobile Internet Explorer 9.0",
+		"IEMobile/10.0", "Mobile Internet Explorer 10.0",
+		"IEMobile", "Mobile Internet Explorer unknown version",
 		"MSIE 4", "Explorer 4.x",
 		"MSIE 5", "Explorer 5.x",
 		"MSIE 6", "Explorer 6.x",
 		"MSIE 7", "Explorer 7.x",
+		"MSIE 8", "Explorer 8.x",
+		"MSIE 9", "Explorer 9.x",
+		"MSIE 10", "Explorer 10.x",
 		"MSIE", "Explorer unknown version",
 		"Safari", NULL,
 		"Konqueror", NULL,
@@ -1444,7 +1458,8 @@ int vi_process_browsers(struct vih *vih, char *agent)
 		"Firefox", NULL,
 		"MultiZilla", NULL,
 		"Gecko", "Other Mozilla based",
-		"Wget", NULL,
+		"wget", NULL,
+		"Wget", "wget",
 		"Lynx", NULL,
 		"Links ", "Links",
 		"ELinks ", "Links",
@@ -1472,6 +1487,7 @@ int vi_process_browsers(struct vih *vih, char *agent)
 		"Yeti", "Nava.com Bot",
 		"APT-HTTP", "Apt",
 		"git", "Git",
+		"curl", NULL,
 		"", "Unknown",
 		NULL, NULL,
 	};
