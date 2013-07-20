@@ -1413,6 +1413,7 @@ int vi_process_os(struct vih *vih, char *agent)
 		"-linux-", "Linux",
 		"Macintosh", NULL,
 		"Mac_PowerPC", "Macintosh",
+		"Darwin", "Macintosh",
 		"SunOS", NULL,
 		"FreeBSD", NULL,
 		"OpenBSD", NULL,
